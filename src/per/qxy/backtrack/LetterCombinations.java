@@ -26,7 +26,7 @@ public class LetterCombinations {
         return result;
     }
 
-    static void backtracking(String digits, Integer startIndex, LinkedList<Character> path, List<String> result) {
+    static void backtracking(String digits, Integer index, LinkedList<Character> path, List<String> result) {
         if (path.size() == digits.length()) {
             StringBuilder builder = new StringBuilder();
             for (Character character : path) {
@@ -37,13 +37,14 @@ public class LetterCombinations {
         }
 
         //首先找到要被遍历的元素集合
-        int digit = digits.charAt(startIndex) - '0';
+        int digit = digits.charAt(index) - '0';
         String letters = letterMap[digit];
 
-        //对字符集进行遍历
+        //对字符集进行遍历 一定要找到被遍历的字符集
         for (int i = 0; i < letters.length() ; i++) {
             path.add(letters.charAt(i));
-            backtracking(digits, startIndex + 1, path, result);
+            // index 通过index 获取被遍历的字符集
+            backtracking(digits, index + 1, path, result);
             path.removeLast();
         }
     }
