@@ -14,7 +14,9 @@ public class LetterCombinations {
 
 
     public static void main(String[] args) {
-        List<String> strings = letterCombinations("234");
+        Scanner in = new Scanner(System.in);
+        String s = in.nextLine();
+        List<String> strings = letterCombinations(s);
         strings.forEach(System.out::println);
 
     }
