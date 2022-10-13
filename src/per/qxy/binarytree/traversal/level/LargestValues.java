@@ -2,27 +2,30 @@ package per.qxy.binarytree.traversal.level;
 
 import per.qxy.binarytree.TreeNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
- * @ClassName RightSideView
- * @Description 199 最右边的元素但不一定是右节点的
- * @Date 2022/10/12 下午3:00
- * @Created by qxy
+ * @Classname LargestValues
+ * @Description TODO
+ * @Date 2022/10/13 23:34
+ * @Created by qxy20
  */
+public class LargestValues {
 
-
-public class RightSideView {
-    public List<Integer> rightSideView(TreeNode root) {
+    public List<Integer> solution(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
 
-        if (root != null) {
-            queue.add(root);
+        if (root == null) {
+            return result;
         }
-
-        while (!queue.isEmpty()) {
+        queue.add(root);
+        while (queue.size() > 0) {
             int size = queue.size();
+            int temp = Integer.MIN_VALUE;
             for (int i = 0; i < size; i++) {
                 TreeNode poll = queue.poll();
                 if (poll != null) {
@@ -32,13 +35,12 @@ public class RightSideView {
                     if (poll.right != null) {
                         queue.add(poll.right);
                     }
-                }
-                if (i == size - 1) {
-                    if (poll != null) {
-                        result.add(poll.val);
+                    if (poll.val > temp) {
+                        temp = poll.val;
                     }
                 }
             }
+            result.add(temp);
         }
         return result;
     }
